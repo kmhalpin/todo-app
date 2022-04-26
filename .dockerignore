@@ -1,0 +1,7 @@
+/web/node_modules/
+/web/build/
+/bin/
+.dockerignore
+.git
+.gitignore
+Dockerfile
