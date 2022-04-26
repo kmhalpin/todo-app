@@ -27,3 +27,7 @@ run:
 .PHONY: gen
 gen:
 	@go generate -n -x ./...
+
+.PHONY: env
+env:
+	@cat .env.example > .env
