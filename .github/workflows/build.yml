@@ -1,0 +1,26 @@
+name: Build & Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - id: tags
+      run: echo ::set-output name=tag::${GITHUB_SHA}
+    - uses: docker/login-action@v1
+      with:
+        username: kmhalpin
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: |
+          kmhalpin/todoapp:latest
+          kmhalpin/todoapp:${{ steps.tags.outputs.tag }}
